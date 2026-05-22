@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f5f0e8;
+  --ink: #1a1a1a;
+  --red: #ef3b2d;
+  --pink: #f26aa5;
+  --yellow: #f5c400;
+  --green: #006b55;
+  --blue: #8fa4e8;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Hide default cursor on pointer devices */
+@media (hover: hover) and (pointer: fine) {
+  html, * {
+    cursor: none !important;
+  }
+}
+
+body {
+  background-color: #000;
+  color: var(--ink);
+  font-family: var(--font-space-grotesk), Arial, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+.font-title {
+  font-family: var(--font-anton), "Arial Black", sans-serif;
+}
+
+/* Rough sketchy border via layered box-shadows */
+.border-sketchy {
+  border: 3px solid var(--ink);
+  box-shadow:
+    3px 3px 0 0 var(--ink),
+    -1px -1px 0 0 var(--ink),
+    4px 1px 0 0 var(--ink),
+    1px 4px 0 0 var(--ink);
+}
+
+/* Wavy rough underline */
+.underline-rough {
+  position: relative;
+  display: inline-block;
+}
+.underline-rough::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: -2px;
+  right: -2px;
+  height: 4px;
+  background: var(--ink);
+  clip-path: polygon(
+    0% 30%, 3% 70%, 6% 20%, 9% 80%, 13% 40%, 17% 60%, 21% 10%,
+    25% 90%, 29% 50%, 33% 30%, 37% 70%, 41% 20%, 45% 80%, 49% 40%,
+    53% 60%, 57% 10%, 61% 90%, 65% 50%, 69% 30%, 73% 70%, 77% 20%,
+    81% 80%, 85% 40%, 89% 60%, 93% 10%, 97% 90%, 100% 50%
+  );
+}
+
+/* Marquee */
+@keyframes otb-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Doodled cursor */
+.custom-cursor {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: transform 0.04s linear;
+}
