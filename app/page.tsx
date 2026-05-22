@@ -129,7 +129,7 @@ export default function Page() {
               }}
             >
               <Image
-                src="/posters/poster1.jpg"
+                src="/posters/poster1.webp"
                 alt="Over the Breaks — Poster 1"
                 fill
                 style={{ objectFit: "cover", objectPosition: "left center" }}
@@ -149,7 +149,7 @@ export default function Page() {
               }}
             >
               <Image
-                src="/posters/poster2.jpg"
+                src="/posters/poster2.webp"
                 alt="Over the Breaks — Poster 2"
                 fill
                 style={{ objectFit: "cover" }}
