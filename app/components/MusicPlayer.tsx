@@ -14,16 +14,16 @@ function formatTime(s: number): string {
   return `${m}:${sec.toString().padStart(2, "0")}`;
 }
 
-// ── Sketchy SVG icons ─────────────────────────────────────────────────────────
+// ── Icons ─────────────────────────────────────────────────────────────────────
 
 function PlayIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+    <svg width="16" height="16" viewBox="0 0 22 22" fill="none" aria-hidden="true">
       <path
         d="M5.5 3.8 C5.3 3.6 4.9 3.5 4.7 3.7 C4.4 3.9 4.3 4.2 4.4 4.5 L4.4 17.5 C4.3 17.9 4.5 18.2 4.8 18.4 C5.1 18.5 5.4 18.4 5.7 18.2 L18.3 11.7 C18.6 11.5 18.8 11.2 18.7 10.9 C18.6 10.6 18.3 10.4 18 10.3 Z"
-        fill="#ef3b2d"
+        fill="#1a1a1a"
         stroke="#1a1a1a"
-        strokeWidth="1.4"
+        strokeWidth="1.2"
         strokeLinejoin="round"
       />
     </svg>
@@ -32,98 +32,62 @@ function PlayIcon() {
 
 function PauseIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-      <path
-        d="M5.2 3.6 C4.8 3.5 4.5 3.7 4.4 4 C4.2 4.3 4.2 4.7 4.3 5 L4.3 17 C4.2 17.3 4.3 17.7 4.6 17.9 C4.9 18.1 5.3 18.1 5.6 18 L8.6 18 C8.9 18 9.2 17.8 9.4 17.5 C9.5 17.2 9.6 16.8 9.5 16.5 L9.5 5.5 C9.5 5.2 9.4 4.8 9.2 4.6 C9 4.3 8.6 4.2 8.3 4.2 Z"
-        fill="#ef3b2d"
-        stroke="#1a1a1a"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M13.4 3.6 C13 3.5 12.7 3.7 12.6 4 C12.4 4.3 12.4 4.7 12.5 5 L12.5 17 C12.4 17.3 12.5 17.7 12.8 17.9 C13.1 18.1 13.5 18.1 13.8 18 L16.8 18 C17.1 18 17.4 17.8 17.6 17.5 C17.7 17.2 17.8 16.8 17.7 16.5 L17.7 5.5 C17.7 5.2 17.6 4.8 17.4 4.6 C17.2 4.3 16.8 4.2 16.5 4.2 Z"
-        fill="#ef3b2d"
-        stroke="#1a1a1a"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
+    <svg width="16" height="16" viewBox="0 0 22 22" aria-hidden="true">
+      <rect x="4" y="3.5" width="4.5" height="15" rx="0.8" fill="#1a1a1a" />
+      <rect x="13.5" y="3.5" width="4.5" height="15" rx="0.8" fill="#1a1a1a" />
     </svg>
   );
 }
 
 function PrevIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-      <path
-        d="M15.5 4 C15.8 3.7 16.2 3.6 16.5 3.8 C16.8 4 17 4.4 16.9 4.8 L16.9 17.2 C16.9 17.6 16.7 17.9 16.4 18.1 C16 18.3 15.6 18.2 15.3 18 L6.5 12.3 C6.2 12.1 6 11.8 6 11.5 L6 10.5 C6 10.2 6.2 9.9 6.5 9.7 Z"
-        fill="var(--paper)"
-        stroke="#1a1a1a"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M5 4.5 C4.8 4.3 4.5 4.2 4.3 4.4 C4 4.6 3.9 5 4 5.3 L4 16.7 C3.9 17 4.1 17.4 4.4 17.5 C4.7 17.7 5 17.6 5.2 17.4 Z"
-        fill="var(--paper)"
-        stroke="#1a1a1a"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
+    <svg width="16" height="16" viewBox="0 0 22 22" aria-hidden="true">
+      <rect x="3" y="3.5" width="3.5" height="15" rx="0.6" fill="var(--paper)" />
+      <polygon points="19,3.5 19,18.5 8,11" fill="var(--paper)" />
     </svg>
   );
 }
 
 function NextIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-      <path
-        d="M6.5 4 C6.2 3.7 5.8 3.6 5.5 3.8 C5.2 4 5 4.4 5.1 4.8 L5.1 17.2 C5.1 17.6 5.3 17.9 5.6 18.1 C6 18.3 6.4 18.2 6.7 18 L15.5 12.3 C15.8 12.1 16 11.8 16 11.5 L16 10.5 C16 10.2 15.8 9.9 15.5 9.7 Z"
-        fill="var(--paper)"
-        stroke="#1a1a1a"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M17 4.5 C17.2 4.3 17.5 4.2 17.7 4.4 C18 4.6 18.1 5 18 5.3 L18 16.7 C18.1 17 17.9 17.4 17.6 17.5 C17.3 17.7 17 17.6 16.8 17.4 Z"
-        fill="var(--paper)"
-        stroke="#1a1a1a"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
+    <svg width="16" height="16" viewBox="0 0 22 22" aria-hidden="true">
+      <rect x="15.5" y="3.5" width="3.5" height="15" rx="0.6" fill="var(--paper)" />
+      <polygon points="3,3.5 3,18.5 14,11" fill="var(--paper)" />
     </svg>
   );
 }
 
-// ── Vinyl disc ────────────────────────────────────────────────────────────────
-
-function VinylDisc({ spinning }: { spinning: boolean }) {
+function Star() {
   return (
-    <div
-      style={{
-        width: 88,
-        height: 88,
-        animation: spinning ? "otb-spin 3s linear infinite" : "none",
-        filter: "drop-shadow(2px 3px 0px #1a1a1a)",
-      }}
-    >
-      <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
-        <circle cx="44" cy="44" r="41" fill="#1a1a1a" stroke="var(--paper)" strokeWidth="2" />
-        {/* Grooves */}
-        {[34, 28, 22].map((r) => (
-          <circle key={r} cx="44" cy="44" r={r} fill="none" stroke="var(--paper)" strokeWidth="0.6" opacity="0.2" />
-        ))}
-        {/* Red label */}
-        <circle cx="44" cy="44" r="16" fill="#ef3b2d" />
-        <circle cx="44" cy="44" r="16" fill="none" stroke="#1a1a1a" strokeWidth="1.5" />
-        {/* Stars on label */}
-        <polygon
-          points="44,32 45.8,38.5 52.5,38.5 47.1,42.5 49,49 44,45 39,49 40.9,42.5 35.5,38.5 42.2,38.5"
-          fill="var(--paper)"
-          opacity="0.7"
+    <svg width="9" height="9" viewBox="0 0 24 24" fill="var(--paper)" aria-hidden="true">
+      <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+    </svg>
+  );
+}
+
+// ── Pulsing bars indicator ────────────────────────────────────────────────────
+
+function PlayingBars() {
+  return (
+    <span style={{ display: "inline-flex", alignItems: "flex-end", gap: 2, height: 14 }} aria-label="playing">
+      {[1, 2, 3].map((i) => (
+        <span
+          key={i}
+          style={{
+            display: "block",
+            width: 3,
+            backgroundColor: "#1a1a1a",
+            borderRadius: 1,
+            animation: `otb-bar-${i} 0.7s ease-in-out ${i * 0.12}s infinite alternate`,
+          }}
         />
-        {/* Centre hole */}
-        <circle cx="44" cy="44" r="3.5" fill="#1a1a1a" stroke="var(--paper)" strokeWidth="1" />
-      </svg>
-    </div>
+      ))}
+      <style>{`
+        @keyframes otb-bar-1 { from { height: 4px } to { height: 13px } }
+        @keyframes otb-bar-2 { from { height: 8px } to { height: 5px } }
+        @keyframes otb-bar-3 { from { height: 3px } to { height: 11px } }
+      `}</style>
+    </span>
   );
 }
 
@@ -132,6 +96,7 @@ function VinylDisc({ spinning }: { spinning: boolean }) {
 export default function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
+  const firstMount = useRef(true);
   const [trackIdx, setTrackIdx] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -140,19 +105,25 @@ export default function MusicPlayer() {
 
   const track = TRACKS[trackIdx];
 
+  // Load track + autoplay on first mount, resume if playing on subsequent changes
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    const wasPlaying = isPlaying;
+    const shouldPlay = firstMount.current ? true : isPlaying;
+    firstMount.current = false;
+
     audio.pause();
     audio.src = track.src;
     audio.load();
-    if (wasPlaying) {
-      audio.play().catch(() => setIsPlaying(false));
+
+    if (shouldPlay) {
+      const tryPlay = () => { audio.play().catch(() => {}); };
+      audio.addEventListener("canplay", tryPlay, { once: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trackIdx]);
 
+  // Audio event listeners
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -180,21 +151,20 @@ export default function MusicPlayer() {
   const togglePlay = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    if (audio.paused) {
-      audio.play().catch(() => {});
-    } else {
-      audio.pause();
-    }
+    if (audio.paused) { audio.play().catch(() => {}); }
+    else { audio.pause(); }
     setBtnActive(true);
     setTimeout(() => setBtnActive(false), 160);
   }, []);
 
-  const goPrev = useCallback(() => {
-    setTrackIdx((i) => (i - 1 + TRACKS.length) % TRACKS.length);
-  }, []);
-
-  const goNext = useCallback(() => {
-    setTrackIdx((i) => (i + 1) % TRACKS.length);
+  const selectTrack = useCallback((i: number) => {
+    setTrackIdx(i);
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.pause();
+    audio.src = TRACKS[i].src;
+    audio.load();
+    audio.play().catch(() => {});
   }, []);
 
   const handleProgressClick = useCallback(
@@ -213,9 +183,8 @@ export default function MusicPlayer() {
 
   return (
     <>
-      <audio ref={audioRef} preload="metadata" />
+      <audio ref={audioRef} preload="auto" />
 
-      {/* Shared SVG filters */}
       <svg width="0" height="0" style={{ position: "absolute", pointerEvents: "none" }} aria-hidden="true">
         <defs>
           <filter id="otb-crayon-box" x="-4%" y="-4%" width="108%" height="108%">
@@ -229,126 +198,119 @@ export default function MusicPlayer() {
         </defs>
       </svg>
 
-      {/* Rectangle box */}
       <div
         style={{
           backgroundColor: "#ef3b2d",
           border: "2.5px solid #1a1a1a",
           boxShadow: "5px 5px 0 0 #1a1a1a, -1px -1px 0 0 #1a1a1a",
-          padding: "1.6rem 1.4rem 1.4rem",
+          padding: "1.2rem 1.2rem 1.1rem",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          gap: "1rem",
+          gap: "0.9rem",
           filter: "url(#otb-crayon-box)",
-          // Slight tilt — like it was stuck to the poster
           transform: "rotate(0.6deg)",
-          // Hatching texture overlay via repeating gradient
           backgroundImage:
             "repeating-linear-gradient(52deg, transparent, transparent 6px, rgba(26,26,26,0.04) 6px, rgba(26,26,26,0.04) 7px)",
+          minWidth: "clamp(160px, 36vw, 220px)",
         }}
       >
-        {/* Header label */}
-        <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+        {/* Header */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
           <Star />
-          <span
-            style={{
-              fontFamily: "var(--font-anton), 'Arial Black', sans-serif",
-              fontSize: "0.7rem",
-              letterSpacing: "0.22em",
-              color: "var(--paper)",
-              textTransform: "uppercase",
-              textShadow: "1px 1px 0 #1a1a1a",
-            }}
-          >
-            Now Playing
-          </span>
+          <span style={labelStyle}>Now Playing</span>
           <Star />
         </div>
 
-        {/* Vinyl */}
-        <VinylDisc spinning={isPlaying} />
+        {/* ── Track list ── */}
+        <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 0 }}>
+          {TRACKS.map((t, i) => {
+            const active = i === trackIdx;
+            return (
+              <li key={t.src}>
+                {i > 0 && (
+                  <div style={{ height: 1.5, backgroundColor: "rgba(26,26,26,0.25)", margin: "0 0" }} />
+                )}
+                <button
+                  onClick={() => selectTrack(i)}
+                  aria-current={active ? "true" : undefined}
+                  style={{
+                    width: "100%",
+                    background: active ? "var(--paper)" : "transparent",
+                    border: "none",
+                    padding: "0.5rem 0.6rem",
+                    cursor: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    textAlign: "left",
+                    transition: "background 0.15s",
+                  }}
+                >
+                  {/* Track number */}
+                  <span
+                    style={{
+                      fontFamily: "var(--font-anton), 'Arial Black', sans-serif",
+                      fontSize: "0.6rem",
+                      letterSpacing: "0.1em",
+                      color: active ? "#ef3b2d" : "rgba(245,240,232,0.55)",
+                      minWidth: 16,
+                      textShadow: "none",
+                    }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
 
-        {/* Track name */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2, textAlign: "center" }}>
-          <span
-            style={{
-              fontFamily: "var(--font-anton), 'Arial Black', sans-serif",
-              fontSize: "0.62rem",
-              letterSpacing: "0.22em",
-              color: "var(--paper)",
-              textTransform: "uppercase",
-              opacity: 0.75,
-              textShadow: "1px 1px 0 #1a1a1a",
-            }}
-          >
-            {track.artist}
-          </span>
-          <span
-            style={{
-              fontFamily: "var(--font-anton), 'Arial Black', sans-serif",
-              fontSize: "clamp(0.85rem, 2.5vw, 1.05rem)",
-              letterSpacing: "0.1em",
-              color: "var(--paper)",
-              textTransform: "uppercase",
-              textShadow: "1.5px 1.5px 0 #1a1a1a, -0.5px 0.5px 0 #1a1a1a",
-              lineHeight: 1.15,
-            }}
-          >
-            {track.title}
-          </span>
-        </div>
+                  {/* Title block */}
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div
+                      style={{
+                        fontFamily: "var(--font-anton), 'Arial Black', sans-serif",
+                        fontSize: "0.58rem",
+                        letterSpacing: "0.18em",
+                        color: active ? "rgba(26,26,26,0.55)" : "rgba(245,240,232,0.55)",
+                        textTransform: "uppercase",
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {t.artist}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: "var(--font-anton), 'Arial Black', sans-serif",
+                        fontSize: "clamp(0.75rem, 2.5vw, 0.92rem)",
+                        letterSpacing: "0.06em",
+                        color: active ? "#1a1a1a" : "var(--paper)",
+                        textTransform: "uppercase",
+                        textShadow: active ? "none" : "1px 1px 0 #1a1a1a",
+                        lineHeight: 1.15,
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {t.title}
+                    </div>
+                  </div>
 
-        {/* Controls row */}
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <button
-            onClick={goPrev}
-            aria-label="Previous track"
-            style={iconBtnStyle}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
-          >
-            <PrevIcon />
-          </button>
+                  {/* Playing indicator or track number */}
+                  <div style={{ flexShrink: 0, width: 18, display: "flex", justifyContent: "flex-end" }}>
+                    {active && isPlaying ? (
+                      <PlayingBars />
+                    ) : active ? (
+                      <PlayIcon />
+                    ) : null}
+                  </div>
+                </button>
+              </li>
+            );
+          })}
+        </ol>
 
-          {/* Big play/pause */}
-          <button
-            onClick={togglePlay}
-            aria-label={isPlaying ? "Pause" : "Play"}
-            style={{
-              width: 52,
-              height: 52,
-              borderRadius: "50%",
-              backgroundColor: "var(--paper)",
-              border: "2.5px solid #1a1a1a",
-              boxShadow: btnActive
-                ? "1px 1px 0 0 #1a1a1a"
-                : "3px 3px 0 0 #1a1a1a, -1px 0 0 0 #1a1a1a",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "none",
-              transform: btnActive ? "translate(2px, 2px)" : "none",
-              transition: "transform 0.1s ease, box-shadow 0.1s ease",
-              filter: "url(#otb-crayon-btn)",
-            }}
-          >
-            {isPlaying ? <PauseIcon /> : <PlayIcon />}
-          </button>
-
-          <button
-            onClick={goNext}
-            aria-label="Next track"
-            style={iconBtnStyle}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
-          >
-            <NextIcon />
-          </button>
-        </div>
+        {/* Divider */}
+        <div style={{ height: 2, backgroundColor: "rgba(26,26,26,0.3)" }} />
 
         {/* Progress bar */}
-        <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 4 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
           <div
             ref={progressRef}
             onClick={handleProgressClick}
@@ -358,13 +320,13 @@ export default function MusicPlayer() {
             aria-valuemax={100}
             style={{
               width: "100%",
-              height: 11,
+              height: 10,
               backgroundColor: "rgba(26,26,26,0.25)",
               border: "2px solid #1a1a1a",
               cursor: "none",
               position: "relative",
               overflow: "hidden",
-              transform: "skewY(-0.5deg)",
+              transform: "skewY(-0.4deg)",
               boxShadow: "2px 2px 0 0 #1a1a1a",
             }}
           >
@@ -380,43 +342,55 @@ export default function MusicPlayer() {
               }}
             />
           </div>
-
-          {/* Time stamps */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              fontFamily: "var(--font-anton), 'Arial Black', sans-serif",
-              fontSize: "0.58rem",
-              letterSpacing: "0.12em",
-              color: "var(--paper)",
-              textShadow: "1px 1px 0 #1a1a1a",
-            }}
-          >
+          <div style={{ display: "flex", justifyContent: "space-between", ...labelStyle, fontSize: "0.55rem" }}>
             <span>{formatTime(currentTime)}</span>
             <span>{formatTime(duration)}</span>
           </div>
         </div>
 
-        {/* Track selector dots */}
-        <div style={{ display: "flex", gap: 8 }}>
-          {TRACKS.map((t, i) => (
-            <button
-              key={t.src}
-              onClick={() => setTrackIdx(i)}
-              aria-label={`Play ${t.title}`}
-              style={{
-                width: 9,
-                height: 9,
-                borderRadius: "50%",
-                backgroundColor: i === trackIdx ? "var(--paper)" : "rgba(255,255,255,0.3)",
-                border: "1.5px solid #1a1a1a",
-                padding: 0,
-                cursor: "none",
-                transition: "background-color 0.2s",
-              }}
-            />
-          ))}
+        {/* Transport controls */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
+          <button
+            onClick={() => setTrackIdx((i) => (i - 1 + TRACKS.length) % TRACKS.length)}
+            aria-label="Previous track"
+            style={ghostBtnStyle}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.8")}
+          >
+            <PrevIcon />
+          </button>
+
+          <button
+            onClick={togglePlay}
+            aria-label={isPlaying ? "Pause" : "Play"}
+            style={{
+              width: 46,
+              height: 46,
+              borderRadius: "50%",
+              backgroundColor: "var(--paper)",
+              border: "2.5px solid #1a1a1a",
+              boxShadow: btnActive ? "1px 1px 0 0 #1a1a1a" : "3px 3px 0 0 #1a1a1a, -1px 0 0 0 #1a1a1a",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "none",
+              transform: btnActive ? "translate(2px, 2px)" : "none",
+              transition: "transform 0.1s ease, box-shadow 0.1s ease",
+              filter: "url(#otb-crayon-btn)",
+            }}
+          >
+            {isPlaying ? <PauseIcon /> : <PlayIcon />}
+          </button>
+
+          <button
+            onClick={() => setTrackIdx((i) => (i + 1) % TRACKS.length)}
+            aria-label="Next track"
+            style={ghostBtnStyle}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.8")}
+          >
+            <NextIcon />
+          </button>
         </div>
       </div>
     </>
@@ -425,7 +399,16 @@ export default function MusicPlayer() {
 
 // ── Shared styles ─────────────────────────────────────────────────────────────
 
-const iconBtnStyle: React.CSSProperties = {
+const labelStyle: React.CSSProperties = {
+  fontFamily: "var(--font-anton), 'Arial Black', sans-serif",
+  fontSize: "0.65rem",
+  letterSpacing: "0.22em",
+  color: "var(--paper)",
+  textTransform: "uppercase",
+  textShadow: "1px 1px 0 #1a1a1a",
+};
+
+const ghostBtnStyle: React.CSSProperties = {
   background: "none",
   border: "none",
   padding: 6,
@@ -433,14 +416,6 @@ const iconBtnStyle: React.CSSProperties = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  opacity: 0.85,
+  opacity: 0.8,
   transition: "opacity 0.1s",
 };
-
-function Star() {
-  return (
-    <svg width="10" height="10" viewBox="0 0 24 24" fill="var(--paper)" aria-hidden="true">
-      <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-    </svg>
-  );
-}

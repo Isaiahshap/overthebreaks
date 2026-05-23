@@ -165,22 +165,20 @@ export default function Page() {
           style={{ maxWidth: 860 }}
           aria-label="Event details and music"
         >
+          {/* Two columns — always side by side, even on mobile */}
           <div
             style={{
               display: "flex",
-              flexWrap: "wrap",
-              gap: "clamp(1.2rem, 3vw, 2rem)",
+              flexWrap: "nowrap",
+              gap: "clamp(0.75rem, 2.5vw, 2rem)",
               alignItems: "stretch",
-              justifyContent: "center",
             }}
           >
             {/* Info box */}
             <div
               style={{
-                flex: "1 1 260px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "2rem",
+                flex: "1 1 0",
+                minWidth: 0,
                 textAlign: "center",
               }}
             >
@@ -188,9 +186,9 @@ export default function Page() {
                 style={{
                   border: "2.5px solid #1a1a1a",
                   boxShadow: "5px 5px 0 0 #1a1a1a, -1px -1px 0 0 #1a1a1a",
-                  padding: "2rem 2.5rem",
+                  padding: "clamp(1rem, 3vw, 2rem) clamp(0.75rem, 3vw, 2.5rem)",
                   backgroundColor: "var(--paper)",
-                  flex: 1,
+                  height: "100%",
                 }}
               >
                 <ul className="list-none p-0 m-0 space-y-1.5">
@@ -203,7 +201,7 @@ export default function Page() {
                       key={line}
                       className="font-title uppercase"
                       style={{
-                        fontSize: "clamp(1.2rem, 3.5vw, 1.75rem)",
+                        fontSize: "clamp(0.8rem, 3.5vw, 1.75rem)",
                         letterSpacing: "0.05em",
                         color: "#1a1a1a",
                         lineHeight: 1.3,
@@ -217,7 +215,7 @@ export default function Page() {
                 <p
                   className="font-title uppercase mt-6"
                   style={{
-                    fontSize: "clamp(0.9rem, 2.2vw, 1.15rem)",
+                    fontSize: "clamp(0.65rem, 2.2vw, 1.15rem)",
                     letterSpacing: "0.2em",
                     color: "#1a1a1a",
                     opacity: 0.5,
@@ -226,14 +224,17 @@ export default function Page() {
                   More Info Soon
                 </p>
               </div>
-
-              <CTAButton />
             </div>
 
-            {/* Music player — same height as info box */}
+            {/* Music player */}
             <div style={{ flex: "0 0 auto", display: "flex", alignItems: "stretch" }}>
               <MusicPlayer />
             </div>
+          </div>
+
+          {/* Button — full width below both columns */}
+          <div style={{ marginTop: "clamp(0.75rem, 2vw, 1.5rem)" }}>
+            <CTAButton />
           </div>
         </section>
       </main>
