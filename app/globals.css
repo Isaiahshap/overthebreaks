@@ -75,6 +75,34 @@ body {
   to   { transform: translateX(-50%); }
 }
 
+/* Vinyl spin */
+@keyframes otb-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Retro static grain — background-position jumps so the noise pattern shifts */
+@keyframes otb-grain {
+  0%   { background-position:   0px   0px; }
+  10%  { background-position: -55px  22px; }
+  20%  { background-position:  72px -44px; }
+  30%  { background-position: -33px  65px; }
+  40%  { background-position:  48px -72px; }
+  50%  { background-position: -76px  31px; }
+  60%  { background-position:  29px  58px; }
+  70%  { background-position: -61px -28px; }
+  80%  { background-position:  43px  77px; }
+  90%  { background-position: -18px -53px; }
+  100% { background-position:   0px   0px; }
+}
+
+/* Applied to <main> only — shows on exposed paper bg, hidden under card backgrounds */
+.otb-static {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='0.65'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  background-repeat: repeat;
+}
+
 /* Doodled cursor */
 .custom-cursor {
   pointer-events: none;

@@ -3,6 +3,7 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import MusicPlayer from "./components/MusicPlayer";
 
 const CustomCursor = dynamic(() => import("./components/CustomCursor"), {
   ssr: false,
@@ -81,7 +82,7 @@ export default function Page() {
 
       <main
         style={{ backgroundColor: "var(--paper)" }}
-        className="min-h-screen w-full flex flex-col items-center px-6 py-16 md:py-24"
+        className="otb-static min-h-screen w-full flex flex-col items-center px-6 py-16 md:py-24"
       >
         {/* ── Title ── */}
         <header className="w-full text-center mb-12 md:mb-16">
@@ -158,52 +159,81 @@ export default function Page() {
           </PosterFrame>
         </section>
 
-        {/* ── Info ── */}
-        <section className="w-full max-w-lg text-center" aria-label="Event details">
+        {/* ── Info + Player ── */}
+        <section
+          className="w-full"
+          style={{ maxWidth: 860 }}
+          aria-label="Event details and music"
+        >
           <div
             style={{
-              border: "2.5px solid #1a1a1a",
-              boxShadow: "5px 5px 0 0 #1a1a1a, -1px -1px 0 0 #1a1a1a",
-              padding: "2rem 2.5rem",
-              backgroundColor: "rgba(255,255,255,0.35)",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "clamp(1.2rem, 3vw, 2rem)",
+              alignItems: "stretch",
+              justifyContent: "center",
             }}
           >
-            <ul className="list-none p-0 m-0 space-y-1.5">
-              {[
-                "2 Nights at The Lodge Room",
-                "September 18 + 19",
-                "Highland Park, Los Angeles",
-              ].map((line) => (
-                <li
-                  key={line}
-                  className="font-title uppercase"
-                  style={{
-                    fontSize: "clamp(0.95rem, 2.8vw, 1.35rem)",
-                    letterSpacing: "0.05em",
-                    color: "#1a1a1a",
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {line}
-                </li>
-              ))}
-            </ul>
-
-            <p
-              className="font-title uppercase mt-6"
+            {/* Info box */}
+            <div
               style={{
-                fontSize: "clamp(0.75rem, 2vw, 0.95rem)",
-                letterSpacing: "0.2em",
-                color: "#1a1a1a",
-                opacity: 0.5,
+                flex: "1 1 260px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "2rem",
+                textAlign: "center",
               }}
             >
-              More Info Soon
-            </p>
-          </div>
+              <div
+                style={{
+                  border: "2.5px solid #1a1a1a",
+                  boxShadow: "5px 5px 0 0 #1a1a1a, -1px -1px 0 0 #1a1a1a",
+                  padding: "2rem 2.5rem",
+                  backgroundColor: "var(--paper)",
+                  flex: 1,
+                }}
+              >
+                <ul className="list-none p-0 m-0 space-y-1.5">
+                  {[
+                    "2 Nights at The Lodge Room",
+                    "September 18 + 19",
+                    "Highland Park, Los Angeles",
+                  ].map((line) => (
+                    <li
+                      key={line}
+                      className="font-title uppercase"
+                      style={{
+                        fontSize: "clamp(1.2rem, 3.5vw, 1.75rem)",
+                        letterSpacing: "0.05em",
+                        color: "#1a1a1a",
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {line}
+                    </li>
+                  ))}
+                </ul>
 
-          <div className="mt-8">
-            <CTAButton />
+                <p
+                  className="font-title uppercase mt-6"
+                  style={{
+                    fontSize: "clamp(0.9rem, 2.2vw, 1.15rem)",
+                    letterSpacing: "0.2em",
+                    color: "#1a1a1a",
+                    opacity: 0.5,
+                  }}
+                >
+                  More Info Soon
+                </p>
+              </div>
+
+              <CTAButton />
+            </div>
+
+            {/* Music player — same height as info box */}
+            <div style={{ flex: "0 0 auto", display: "flex", alignItems: "stretch" }}>
+              <MusicPlayer />
+            </div>
           </div>
         </section>
       </main>
@@ -219,7 +249,8 @@ const ARTISTS = [
   "KIEFER",
   "LUKE TITUS",
   "SHIBO",
-  "GENA KARRIEM RIGGINS",
+  "GENA",
+  "KARRIEM RIGGINS",
   "LIV.E",
   "CARRTOONS",
 ];
@@ -292,7 +323,7 @@ function CTAButton() {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        backgroundColor: hovered ? "#1a1a1a" : "transparent",
+        backgroundColor: hovered ? "#1a1a1a" : "var(--paper)",
         color: hovered ? "var(--paper)" : "#1a1a1a",
         border: "2.5px solid #1a1a1a",
         boxShadow: hovered ? "2px 2px 0 0 #ef3b2d" : "5px 5px 0 0 #1a1a1a",
@@ -304,7 +335,6 @@ function CTAButton() {
         transition: "background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease",
         display: "inline-block",
         width: "100%",
-        maxWidth: "360px",
       }}
       aria-label="Tickets and info coming soon"
     >
