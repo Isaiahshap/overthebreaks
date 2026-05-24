@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const INTERACTIVE = "a, button, input, select, textarea, label, h1, [role='button']";
 
@@ -8,9 +8,12 @@ export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const posRef = useRef({ x: -100, y: -100 });
   const rafRef = useRef<number>(0);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+    setVisible(true);
 
     const onMove = (e: MouseEvent) => {
       posRef.current = { x: e.clientX, y: e.clientY };
@@ -43,6 +46,8 @@ export default function CustomCursor() {
       cancelAnimationFrame(rafRef.current);
     };
   }, []);
+
+  if (!visible) return null;
 
   return (
     <div
