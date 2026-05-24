@@ -96,7 +96,7 @@ function PlayingBars() {
 export default function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
-  const firstMount = useRef(true);
+  const isPlayingRef = useRef(false);
   const [trackIdx, setTrackIdx] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -105,39 +105,28 @@ export default function MusicPlayer() {
 
   const track = TRACKS[trackIdx];
 
-  // Load track + autoplay on first mount, resume if playing on subsequent changes
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    const shouldPlay = firstMount.current ? true : isPlaying;
-    firstMount.current = false;
-
-    audio.pause();
-    audio.src = track.src;
-    audio.load();
-
-    if (shouldPlay) {
-      const tryPlay = () => { audio.play().catch(() => {}); };
-      audio.addEventListener("canplay", tryPlay, { once: true });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [trackIdx]);
-
-  // Audio event listeners
+  // Wire up audio event listeners once
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
     const onTimeUpdate = () => setCurrentTime(audio.currentTime);
     const onDurationChange = () => setDuration(audio.duration || 0);
-    const onEnded = () => setTrackIdx((i) => (i + 1) % TRACKS.length);
-    const onPlay = () => setIsPlaying(true);
-    const onPause = () => setIsPlaying(false);
+    const onEnded = () => {
+      const next = (isPlayingRef.current ? trackIdx + 1 : trackIdx) % TRACKS.length;
+      loadTrack(next, true);
+    };
+    const onPlay = () => { isPlayingRef.current = true; setIsPlaying(true); };
+    const onPause = () => { isPlayingRef.current = false; setIsPlaying(false); };
     audio.addEventListener("timeupdate", onTimeUpdate);
     audio.addEventListener("durationchange", onDurationChange);
     audio.addEventListener("loadedmetadata", onDurationChange);
     audio.addEventListener("ended", onEnded);
     audio.addEventListener("play", onPlay);
     audio.addEventListener("pause", onPause);
+
+    // Initial load + autoplay attempt
+    loadTrack(0, true);
+
     return () => {
       audio.removeEventListener("timeupdate", onTimeUpdate);
       audio.removeEventListener("durationchange", onDurationChange);
@@ -146,7 +135,22 @@ export default function MusicPlayer() {
       audio.removeEventListener("play", onPlay);
       audio.removeEventListener("pause", onPause);
     };
-  }, [trackIdx]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const loadTrack = useCallback((i: number, play: boolean) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    setTrackIdx(i);
+    setCurrentTime(0);
+    setDuration(0);
+    audio.pause();
+    audio.src = TRACKS[i].src;
+    audio.load();
+    if (play) {
+      audio.addEventListener("canplay", () => audio.play().catch(() => {}), { once: true });
+    }
+  }, []);
 
   const togglePlay = useCallback(() => {
     const audio = audioRef.current;
@@ -158,14 +162,8 @@ export default function MusicPlayer() {
   }, []);
 
   const selectTrack = useCallback((i: number) => {
-    setTrackIdx(i);
-    const audio = audioRef.current;
-    if (!audio) return;
-    audio.pause();
-    audio.src = TRACKS[i].src;
-    audio.load();
-    audio.play().catch(() => {});
-  }, []);
+    loadTrack(i, true);
+  }, [loadTrack]);
 
   const handleProgressClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -351,7 +349,7 @@ export default function MusicPlayer() {
         {/* Transport controls */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
           <button
-            onClick={() => setTrackIdx((i) => (i - 1 + TRACKS.length) % TRACKS.length)}
+            onClick={() => selectTrack((trackIdx - 1 + TRACKS.length) % TRACKS.length)}
             aria-label="Previous track"
             style={ghostBtnStyle}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
@@ -383,7 +381,7 @@ export default function MusicPlayer() {
           </button>
 
           <button
-            onClick={() => setTrackIdx((i) => (i + 1) % TRACKS.length)}
+            onClick={() => selectTrack((trackIdx + 1) % TRACKS.length)}
             aria-label="Next track"
             style={ghostBtnStyle}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
