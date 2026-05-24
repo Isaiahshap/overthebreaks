@@ -3,8 +3,8 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 
 const TRACKS = [
-  { artist: "KIEFER", title: "APRIL C", src: "/music/April C 2021.mp3" },
-  { artist: "KIEFER", title: "GOLD + SILVER", src: "/music/GOLD + SILVER UPDATE V5 83 BPM.mp3" },
+  { artist: "KIEFER", title: "APRIL C", src: "/music/kiefer-april-c.mp3" },
+  { artist: "KIEFER", title: "GOLD + SILVER", src: "/music/kiefer-gold-and-silver.mp3" },
 ];
 
 function formatTime(s: number): string {
