@@ -4,6 +4,7 @@ import React, { useRef, useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import MusicPlayer from "./components/MusicPlayer";
+import TicketOverlay from "./components/TicketOverlay";
 
 const CustomCursor = dynamic(() => import("./components/CustomCursor"), {
   ssr: false,
@@ -15,17 +16,55 @@ const LoadingScreen = dynamic(() => import("./components/LoadingScreen"), {
 
 const POSTER_COLORS = ["#ef3b2d", "#f26aa5", "#f5c400", "#006b55", "#8fa4e8"] as const;
 
-function PosterFrame({ children, rotate }: { children: React.ReactNode; rotate: string }) {
+const POSTERS = [
+  {
+    src: "/posters/poster1.webp",
+    alt: "Over the Breaks — Poster 1",
+    objectPosition: "left center",
+  },
+  {
+    src: "/posters/poster2.webp",
+    alt: "Over the Breaks — Poster 2",
+  },
+] as const;
+
+const TICKET_LINKS = [
+  {
+    href: "https://www.lodgeroomhlp.com/shows/kiefer-presents-over-the-breaks/",
+    label: "Tickets for night 1",
+  },
+  {
+    href: "https://www.lodgeroomhlp.com/shows/kiefer-presents-over-the-breaks-2/",
+    label: "Tickets for night 2",
+  },
+] as const;
+
+function PosterFrame({
+  children,
+  rotate,
+  onClick,
+}: {
+  children: React.ReactNode;
+  rotate: string;
+  onClick: () => void;
+}) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <div
+    <button
+      type="button"
+      aria-label="Get tickets"
+      onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         transform: hovered ? `rotate(0deg) scale(1.03)` : `rotate(${rotate})`,
         transition: "transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
         willChange: "transform",
+        background: "none",
+        border: "none",
+        padding: 0,
+        cursor: "pointer",
       }}
       className="relative"
     >
@@ -40,7 +79,7 @@ function PosterFrame({ children, rotate }: { children: React.ReactNode; rotate: 
         }}
       />
       {children}
-    </div>
+    </button>
   );
 }
 
@@ -55,6 +94,8 @@ export default function Page() {
   const [titleColor, setTitleColor] = useState<string>("#1a1a1a");
   const nextColorIndexRef = useRef(0);
 
+  const [ticketsOpen, setTicketsOpen] = useState(false);
+
   const handleTitleEnter = useCallback(() => {
     setTitleColor(POSTER_COLORS[nextColorIndexRef.current]);
     nextColorIndexRef.current = (nextColorIndexRef.current + 1) % POSTER_COLORS.length;
@@ -68,6 +109,12 @@ export default function Page() {
     <>
       <LoadingScreen />
       <CustomCursor />
+
+      <TicketOverlay
+        open={ticketsOpen}
+        tickets={[...TICKET_LINKS]}
+        onClose={() => setTicketsOpen(false)}
+      />
 
       {/* Site content — grows from center via clip-path, sits above loading overlay */}
       <div
@@ -119,44 +166,34 @@ export default function Page() {
           className="w-full max-w-5xl flex flex-col md:flex-row items-center justify-center gap-10 md:gap-14 mb-16 md:mb-20"
           aria-label="Event posters"
         >
-          <PosterFrame rotate="-1.8deg">
-            <div
-              style={{
-                width: "clamp(260px, 36vw, 420px)",
-                aspectRatio: "616/767",
-                position: "relative",
-                overflow: "hidden",
-                backgroundColor: "#d4cfc5",
-              }}
+          {POSTERS.map((poster, index) => (
+            <PosterFrame
+              key={poster.src}
+              rotate={index === 0 ? "-1.8deg" : "1.5deg"}
+              onClick={() => setTicketsOpen(true)}
             >
-              <Image
-                src="/posters/poster1.webp"
-                alt="Over the Breaks — Poster 1"
-                fill
-                style={{ objectFit: "cover", objectPosition: "left center" }}
-                priority
-              />
-            </div>
-          </PosterFrame>
-
-          <PosterFrame rotate="1.5deg">
-            <div
-              style={{
-                width: "clamp(260px, 36vw, 420px)",
-                aspectRatio: "616/767",
-                position: "relative",
-                overflow: "hidden",
-                backgroundColor: "#c9c2b8",
-              }}
-            >
-              <Image
-                src="/posters/poster2.webp"
-                alt="Over the Breaks — Poster 2"
-                fill
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-          </PosterFrame>
+              <div
+                style={{
+                  width: "clamp(260px, 36vw, 420px)",
+                  aspectRatio: "616/767",
+                  position: "relative",
+                  overflow: "hidden",
+                  backgroundColor: index === 0 ? "#d4cfc5" : "#c9c2b8",
+                }}
+              >
+                <Image
+                  src={poster.src}
+                  alt={poster.alt}
+                  fill
+                  style={{
+                    objectFit: "cover",
+                    objectPosition: "objectPosition" in poster ? poster.objectPosition : "center",
+                  }}
+                  priority={index === 0}
+                />
+              </div>
+            </PosterFrame>
+          ))}
         </section>
 
         {/* ── Info + Player ── */}
@@ -189,40 +226,33 @@ export default function Page() {
                   padding: "clamp(1rem, 3vw, 2rem) clamp(0.75rem, 3vw, 2.5rem)",
                   backgroundColor: "var(--paper)",
                   height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
-                <ul className="list-none p-0 m-0 space-y-1.5">
+                <ul className="list-none p-0 m-0 space-y-2">
                   {[
-                    "2 Nights at The Lodge Room",
-                    "September 18 + 19",
-                    "Highland Park, Los Angeles",
-                  ].map((line) => (
+                    { text: "2 Nights at Lodge Room", size: "clamp(1.15rem, 5vw, 2.5rem)" },
+                    { text: "September 18 + 19", size: "clamp(1.55rem, 7vw, 3.4rem)" },
+                    { text: "Highland Park, Los Angeles", size: "clamp(1.05rem, 4.5vw, 2.2rem)" },
+                  ].map(({ text, size }) => (
                     <li
-                      key={line}
+                      key={text}
                       className="font-title uppercase"
                       style={{
-                        fontSize: "clamp(0.8rem, 3.5vw, 1.75rem)",
+                        fontSize: size,
                         letterSpacing: "0.05em",
                         color: "#1a1a1a",
-                        lineHeight: 1.3,
+                        lineHeight: 1.2,
+                        textAlign: "center",
                       }}
                     >
-                      {line}
+                      {text}
                     </li>
                   ))}
                 </ul>
-
-                <p
-                  className="font-title uppercase mt-6"
-                  style={{
-                    fontSize: "clamp(0.65rem, 2.2vw, 1.15rem)",
-                    letterSpacing: "0.2em",
-                    color: "#1a1a1a",
-                    opacity: 0.5,
-                  }}
-                >
-                  More Info Soon
-                </p>
               </div>
             </div>
 
@@ -232,9 +262,17 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Button — full width below both columns */}
-          <div style={{ marginTop: "clamp(0.75rem, 2vw, 1.5rem)" }}>
-            <CTAButton />
+          {/* Ticket buttons — full width below both columns */}
+          <div
+            style={{
+              marginTop: "clamp(0.75rem, 2vw, 1.5rem)",
+              display: "flex",
+              gap: "clamp(0.75rem, 2vw, 1.5rem)",
+            }}
+          >
+            {TICKET_LINKS.map((ticket) => (
+              <CTAButton key={ticket.href} {...ticket} />
+            ))}
           </div>
         </section>
       </main>
@@ -316,11 +354,14 @@ const Marquee = React.memo(function Marquee() {
   );
 });
 
-function CTAButton() {
+function CTAButton({ href, label }: { href: string; label: string }) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <button
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -328,18 +369,23 @@ function CTAButton() {
         color: hovered ? "var(--paper)" : "#1a1a1a",
         border: "2.5px solid #1a1a1a",
         boxShadow: hovered ? "2px 2px 0 0 #ef3b2d" : "5px 5px 0 0 #1a1a1a",
-        padding: "0.9rem 2.2rem",
-        fontSize: "clamp(0.75rem, 2vw, 0.9rem)",
-        letterSpacing: "0.18em",
+        padding: "1rem clamp(0.75rem, 2vw, 1.5rem)",
+        fontSize: "clamp(0.9rem, 3.2vw, 1.35rem)",
+        letterSpacing: "0.12em",
         textTransform: "uppercase",
         fontFamily: "var(--font-anton), 'Arial Black', sans-serif",
         transition: "background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease",
-        display: "inline-block",
-        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flex: "1 1 0",
+        minWidth: 0,
+        textAlign: "center",
+        textDecoration: "none",
       }}
-      aria-label="Tickets and info coming soon"
     >
-      Tickets / Info Coming Soon
-    </button>
+      {label}
+    </a>
   );
 }
+

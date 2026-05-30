@@ -96,6 +96,11 @@ body {
   100% { background-position:   0px   0px; }
 }
 
+@keyframes otb-lightbox-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 /* Applied to <main> only — shows on exposed paper bg, hidden under card backgrounds */
 .otb-static {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='0.65'/%3E%3C/svg%3E");
@@ -109,7 +114,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 10001;
   transform: translate(-50%, -50%);
   will-change: transform;
   transition: transform 0.04s linear;

@@ -5,6 +5,8 @@ import { useRef, useState, useEffect, useCallback } from "react";
 const TRACKS = [
   { artist: "KIEFER", title: "APRIL C", src: "/music/kiefer-april-c.mp3" },
   { artist: "KIEFER", title: "GOLD + SILVER", src: "/music/kiefer-gold-and-silver.mp3" },
+  { artist: "SHIBO", title: "IF ONLY YOU CAN SEE", src: "/music/shibo-ifonlyyoucansee.mp3" },
+  { artist: "SHIBO", title: "CZ101", src: "/music/shibo-cz101.mp3" },
 ];
 
 function formatTime(s: number): string {
