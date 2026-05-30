@@ -185,6 +185,7 @@ export default function Page() {
                   src={poster.src}
                   alt={poster.alt}
                   fill
+                  sizes="(max-width: 768px) 36vw, 420px"
                   style={{
                     objectFit: "cover",
                     objectPosition: "objectPosition" in poster ? poster.objectPosition : "center",
